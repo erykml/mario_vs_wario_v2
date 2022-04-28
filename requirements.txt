@@ -1,0 +1,13 @@
+albumentations==1.0.3
+blinker==1.4
+dagshub==0.1.8
+deepchecks==0.6.1
+dvc==2.10.1
+imagehash==4.2.1
+imgaug==0.4.0
+mlflow==1.25.1
+opencv-python==4.5.5.64
+pytorch-ignite==0.4.8
+pytube==12.0.0
+tensorflow
+torchvision==0.12.0
