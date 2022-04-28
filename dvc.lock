@@ -44,3 +44,24 @@ stages:
       md5: cdc59c86075fdcee3cac9ccc6b133bba.dir
       size: 136473626
       nfiles: 6000
+  train:
+    cmd: python src/train.py
+    deps:
+    - path: data/processed/
+      md5: cdc59c86075fdcee3cac9ccc6b133bba.dir
+      size: 136473626
+      nfiles: 6000
+    - path: src/config.py
+      md5: 327c096fc0fc073c28020e4362ee6858
+      size: 492
+    outs:
+    - path: metrics.csv
+      md5: b4d787a6d60fa2ed91b2a882ce9ae20c
+      size: 114
+    - path: models
+      md5: 08cc2bb4fffc5426987f1c161c78814f.dir
+      size: 2305106
+      nfiles: 4
+    - path: params.yml
+      md5: 6a6246ef5cf8c17da58374615b302959
+      size: 33

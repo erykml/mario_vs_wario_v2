@@ -20,3 +20,12 @@ stages:
     - src/config.py
     outs:
     - data/processed
+  train:
+    cmd: python src/train.py
+    deps:
+    - data/processed/
+    - src/config.py
+    outs:
+    - metrics.csv
+    - models
+    - params.yml
