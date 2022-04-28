@@ -29,3 +29,18 @@ stages:
       md5: f6d218c7faad5ff57d24c9e9df284b66.dir
       size: 232060877
       nfiles: 9238
+  create_train_test_split:
+    cmd: python src/create_train_test_split.py
+    deps:
+    - path: data/raw
+      md5: f6d218c7faad5ff57d24c9e9df284b66.dir
+      size: 232060877
+      nfiles: 9238
+    - path: src/config.py
+      md5: 327c096fc0fc073c28020e4362ee6858
+      size: 492
+    outs:
+    - path: data/processed
+      md5: cdc59c86075fdcee3cac9ccc6b133bba.dir
+      size: 136473626
+      nfiles: 6000
