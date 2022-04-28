@@ -1,0 +1,13 @@
+schema: '2.0'
+stages:
+  get_videos:
+    cmd: python src/get_videos.py
+    deps:
+    - path: src/config.py
+      md5: 327c096fc0fc073c28020e4362ee6858
+      size: 492
+    outs:
+    - path: data/videos
+      md5: 24d464c40fe2e6511058940110924ff0.dir
+      size: 612469522
+      nfiles: 2

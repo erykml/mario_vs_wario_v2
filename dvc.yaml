@@ -1,0 +1,7 @@
+stages:
+  get_videos:
+    cmd: python src/get_videos.py
+    deps:
+    - src/config.py
+    outs:
+    - data/videos
