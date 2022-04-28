@@ -11,3 +11,21 @@ stages:
       md5: 24d464c40fe2e6511058940110924ff0.dir
       size: 612469522
       nfiles: 2
+  extract_frames:
+    cmd: python src/extract_frames.py
+    deps:
+    - path: data/videos
+      md5: 24d464c40fe2e6511058940110924ff0.dir
+      size: 612469522
+      nfiles: 2
+    - path: src/config.py
+      md5: 327c096fc0fc073c28020e4362ee6858
+      size: 492
+    - path: src/utils.py
+      md5: 356a8e60da7843543392eecebaf358e6
+      size: 1905
+    outs:
+    - path: data/raw
+      md5: f6d218c7faad5ff57d24c9e9df284b66.dir
+      size: 232060877
+      nfiles: 9238

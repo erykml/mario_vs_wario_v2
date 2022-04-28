@@ -5,3 +5,11 @@ stages:
     - src/config.py
     outs:
     - data/videos
+  extract_frames:
+    cmd: python src/extract_frames.py
+    deps:
+    - data/videos
+    - src/config.py
+    - src/utils.py
+    outs:
+    - data/raw
