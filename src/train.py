@@ -51,7 +51,6 @@ def get_datasets(validation_ratio=0.2, target_img_size=64, batch_size=32):
 
 if __name__ == "__main__":
 
-    
     mlflow.tensorflow.autolog()
 
     IMG_SIZE = 64
@@ -90,11 +89,15 @@ if __name__ == "__main__":
                       loss = "binary_crossentropy", 
                       metrics = ["accuracy"])
 
+        print("Training the model...")
         model.fit(training_set,
                   validation_data=valid_set,
                   epochs = EPOCHS)
+        print("Training completed.")
 
+        print("Evaluating the model...")
         test_loss, test_accuracy = model.evaluate(test_set)
+        print("Evaluating completed.")
 
         with dagshub_logger() as logger:
             logger.log_metrics(loss=test_loss, accuracy=test_accuracy)
@@ -116,4 +119,6 @@ if __name__ == "__main__":
             }
         )
 
+        print("Saving the model...")
         model.save(MODELS_DIR)
+        print("done.")
