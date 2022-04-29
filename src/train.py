@@ -55,7 +55,8 @@ if __name__ == "__main__":
     mlflow.tensorflow.autolog()
 
     IMG_SIZE = 64
-    LR = 0.01
+    LR = 0.001
+    EPOCHS = 20
 
     with mlflow.start_run():
         training_set, valid_set, test_set = get_datasets(validation_ratio=0.2, 
@@ -91,7 +92,7 @@ if __name__ == "__main__":
 
         model.fit(training_set,
                   validation_data=valid_set,
-                  epochs = 10)
+                  epochs = EPOCHS)
 
         test_loss, test_accuracy = model.evaluate(test_set)
 
@@ -99,12 +100,14 @@ if __name__ == "__main__":
             logger.log_metrics(loss=test_loss, accuracy=test_accuracy)
             logger.log_hyperparams({
                 "img_size": IMG_SIZE,
-                "learning_rate": LR
+                "learning_rate": LR,
+                "epochs": EPOCHS
             })
 
         mlflow.log_params({
             "img_size": IMG_SIZE,
-            "learning_rate": LR
+            "learning_rate": LR,
+            "epochs": EPOCHS
         })
         mlflow.log_metrics(
             {
