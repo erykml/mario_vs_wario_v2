@@ -56,12 +56,12 @@ stages:
       size: 492
     outs:
     - path: metrics.csv
-      md5: b4d787a6d60fa2ed91b2a882ce9ae20c
-      size: 114
+      md5: 924feab0d115b5e0755b746edbb6c501
+      size: 116
     - path: models
-      md5: 08cc2bb4fffc5426987f1c161c78814f.dir
-      size: 2305106
-      nfiles: 4
+      md5: 147d471ca5c7c94dd4e84ef800800045.dir
+      size: 2311346
+      nfiles: 5
     - path: params.yml
-      md5: 6a6246ef5cf8c17da58374615b302959
-      size: 33
+      md5: eda5530b92c0818767c3d0becf7b5822
+      size: 45
