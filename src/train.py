@@ -15,7 +15,10 @@ os.environ['MLFLOW_TRACKING_USERNAME'] = USER_NAME
 os.environ['MLFLOW_TRACKING_PASSWORD'] = PASSWORD
 
 def get_datasets(validation_ratio=0.2, target_img_size=64, batch_size=32):
-
+    """
+    Train/valid/test split based on this SO answer:
+    https://stackoverflow.com/questions/42443936/keras-split-train-test-set-when-using-imagedatagenerator
+    """
     train_datagen = ImageDataGenerator(rescale = 1./255,
                                        zoom_range=[0.5, 1.5],
                                        validation_split=validation_ratio)
@@ -49,45 +52,54 @@ def get_datasets(validation_ratio=0.2, target_img_size=64, batch_size=32):
 
     return training_set, valid_set, test_set
 
+def get_model(input_img_size, lr):
+    """
+    Returns a compiled model. 
+    Architecture is fixed, inputs change the image size and the learning rate.
+    """ 
+    # Initializing 
+    model = Sequential()
+
+    # 1st conv. layer
+    model.add(Conv2D(32, (3, 3), input_shape = (input_img_size, input_img_size, 1), activation = "relu"))
+    model.add(MaxPooling2D(pool_size = (2, 2)))
+
+    # 2nd conv. layer
+    model.add(Conv2D(32, (3, 3), activation = "relu")) 
+    model.add(MaxPooling2D(pool_size = (2, 2)))
+
+    # 3nd conv. layer
+    model.add(Conv2D(64, (3, 3), activation = "relu")) 
+    model.add(MaxPooling2D(pool_size = (2, 2)))
+
+    # Flattening
+    model.add(Flatten())
+
+    # Full connection
+    model.add(Dense(units = 64, activation = "relu"))
+    model.add(Dropout(0.5))
+    model.add(Dense(units = 1, activation = "sigmoid"))
+
+    model.compile(optimizer = tensorflow.keras.optimizers.Adam(learning_rate=lr),
+                    loss = "binary_crossentropy", 
+                    metrics = ["accuracy"])
+
+    return model
+
 if __name__ == "__main__":
 
     mlflow.tensorflow.autolog()
 
-    IMG_SIZE = 64
+    IMG_SIZE = 128
     LR = 0.001
-    EPOCHS = 20
+    EPOCHS = 10
 
     with mlflow.start_run():
         training_set, valid_set, test_set = get_datasets(validation_ratio=0.2, 
                                                          target_img_size=IMG_SIZE, 
                                                          batch_size=32)
-
-        # Initialising 
-        model = Sequential()
-
-        # 1st conv. layer
-        model.add(Conv2D(32, (3, 3), input_shape = (IMG_SIZE, IMG_SIZE, 1), activation = "relu"))
-        model.add(MaxPooling2D(pool_size = (2, 2)))
-
-        # 2nd conv. layer
-        model.add(Conv2D(32, (3, 3), activation = "relu")) #no need to specify the input shape
-        model.add(MaxPooling2D(pool_size = (2, 2)))
-
-        # 3nd conv. layer
-        model.add(Conv2D(64, (3, 3), activation = "relu")) #no need to specify the input shape
-        model.add(MaxPooling2D(pool_size = (2, 2)))
-
-        # Flattening
-        model.add(Flatten())
-
-        # Full connection
-        model.add(Dense(units = 64, activation = "relu"))
-        model.add(Dropout(0.5)) # quite aggresive dropout, maybe reduce
-        model.add(Dense(units = 1, activation = "sigmoid"))
-
-        model.compile(optimizer = tensorflow.keras.optimizers.Adam(learning_rate=LR),
-                      loss = "binary_crossentropy", 
-                      metrics = ["accuracy"])
+        model = get_model(IMG_SIZE, LR)
+       
 
         print("Training the model...")
         model.fit(training_set,
