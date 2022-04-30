@@ -41,27 +41,27 @@ stages:
       size: 492
     outs:
     - path: data/processed
-      md5: cdc59c86075fdcee3cac9ccc6b133bba.dir
-      size: 136473626
-      nfiles: 6000
+      md5: 1f4a40043a6fdcfab7bdafb11daf5f5f.dir
+      size: 136485922
+      nfiles: 6002
   train:
     cmd: python src/train.py
     deps:
     - path: data/processed/
-      md5: cdc59c86075fdcee3cac9ccc6b133bba.dir
-      size: 136473626
-      nfiles: 6000
+      md5: 1f4a40043a6fdcfab7bdafb11daf5f5f.dir
+      size: 136485922
+      nfiles: 6002
     - path: src/config.py
       md5: 327c096fc0fc073c28020e4362ee6858
       size: 492
     outs:
     - path: metrics.csv
-      md5: 924feab0d115b5e0755b746edbb6c501
+      md5: 7420d5d4c188ae7153122850e2eac07f
       size: 116
     - path: models
-      md5: 147d471ca5c7c94dd4e84ef800800045.dir
-      size: 2311346
+      md5: 614b0ef7f0ceed4b235b16c53f44de55.dir
+      size: 10175722
       nfiles: 5
     - path: params.yml
-      md5: eda5530b92c0818767c3d0becf7b5822
-      size: 45
+      md5: 15f8056f1bac19ad37fe495257ffbc53
+      size: 46
