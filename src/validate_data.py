@@ -1,3 +1,5 @@
+# script for creating a data validation report with `deepchecks`
+
 from deepchecks.vision.simple_classification_data import load_dataset
 from deepchecks.vision.suites import train_test_validation
 from config import PROCESSED_IMAGES_DIR

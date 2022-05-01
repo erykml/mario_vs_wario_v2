@@ -6,8 +6,8 @@ from random import sample, seed
 import shutil
 from config import *
 
-def create_train_test_sets():
-
+if __name__ == "__main__":
+    
     seed(42)
 
     for class_name in CLASSES:
@@ -29,6 +29,3 @@ def create_train_test_sets():
                 dst = os.path.join(PROCESSED_IMAGES_DIR, dataset, class_name, f)
                 os.makedirs(os.path.dirname(dst), exist_ok=True)
                 shutil.copy(src, dst)
-
-if __name__ == "__main__":
-    create_train_test_sets()

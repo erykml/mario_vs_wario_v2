@@ -30,13 +30,16 @@ jobs:
         pip install -r requirements.txt
     
     - name: Get data
-      # uses: iterative/setup-dvc@v1
       run: |
         # dvc remote add origin https://dagshub.com/eryk.lewinson/mario_vs_wario_v2.dvc
         dvc remote modify origin --local auth basic
         dvc remote modify origin --local user $DVC_USERNAME
         dvc remote modify origin --local password $DVC_PASSWORD
         dvc pull create_train_test_split -r origin
+
+    - name: Remove the old validation report
+      run:
+        rm data_validation.html
         
     - name: Validate data with deepchecks
       run: |

@@ -1,12 +1,12 @@
 # script used for downloading the source videos from YouTube
+# details about which videos to download are in the config.py file
 
 from pytube import YouTube
 import os 
 from config import VIDEOS_DIR, YT_LINKS_DIR, CLASSES
 
-
-def download_videos_from_yt():
-
+if __name__ == "__main__":
+    
     os.makedirs(os.path.dirname(VIDEOS_DIR), exist_ok=True)
 
     for class_name in CLASSES:
@@ -25,6 +25,3 @@ def download_videos_from_yt():
         )
 
         print("done.")
-
-if __name__ == "__main__":
-    download_videos_from_yt()

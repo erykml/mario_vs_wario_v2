@@ -3,9 +3,9 @@
 from utils import FrameExtractor
 import os
 from config import VIDEOS_DIR, VIDEO_NAMES_DIR, RAW_IMAGES_DIR, CLASSES
-
-def extract_frames_from_videos():
-
+      
+if __name__ == "__main__":
+    
     for class_name in CLASSES:
 
         print(f"Extracting images for class {class_name}...")
@@ -20,6 +20,3 @@ def extract_frames_from_videos():
                           dest_path=dest_dir)
 
         print("done.")
-    
-if __name__ == "__main__":
-    extract_frames_from_videos()
