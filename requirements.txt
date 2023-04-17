@@ -2,7 +2,7 @@ albumentations==1.0.3
 blinker==1.4
 dagshub==0.1.8
 deepchecks==0.6.1
-dvc==2.10.1
+dvc==2.54.0
 imagehash==4.2.1
 imgaug==0.4.0
 mlflow==1.25.1
